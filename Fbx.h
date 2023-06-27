@@ -3,12 +3,13 @@
 #include <d3d11.h>
 #include <fbxsdk.h>
 #include <string>
-#include "Texture.h"
 #include "Transform.h"
 
 #pragma comment(lib, "LibFbxSDK-MT.lib")
 #pragma comment(lib, "LibXml2-MT.lib")
 #pragma comment(lib, "zlib-MT.lib")
+
+class Texture;
 
 class Fbx
 {
