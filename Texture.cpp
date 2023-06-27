@@ -3,7 +3,7 @@
 
 #include <DirectXTex.h>
 
-#pragma comment( lib, "DirectXTex.lib" )
+#pragma comment(lib, "DirectXTex.lib" )
 
 Texture::Texture()
 	:pSampler_(nullptr), pSRV_(nullptr)
@@ -62,6 +62,6 @@ HRESULT Texture::Load(string filename)
 
 void Texture::Release()
 {
-	pSampler_->Release();
-	pSRV_->Release();
+	SAFE_RELEASE(pSampler_);
+	SAFE_RELEASE(pSRV_);
 }
