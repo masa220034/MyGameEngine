@@ -27,6 +27,7 @@ class Fbx
 	struct VERTEX
 	{
 		XMVECTOR position;
+		XMVECTOR uv;
 	};
 
 	int vertexCount_;	//頂点数
@@ -34,17 +35,17 @@ class Fbx
 	int materialCount_;	//マテリアルの個数
 
 	ID3D11Buffer* pVertexBuffer_;
-	ID3D11Buffer* pIndexBuffer_;
+	ID3D11Buffer** pIndexBuffer_;
 	ID3D11Buffer* pConstantBuffer_;
 	MATERIAL* pMaterialList_;
 
 	void InitVertex(fbxsdk::FbxMesh* mesh);
 	void InitIndex(fbxsdk::FbxMesh* mesh);
 	void IntConstantBuffer();
+	void InitMaterial(fbxsdk::FbxNode* pNode);
 public:
 	Fbx();
 	HRESULT Load(std::string fileName);
 	void    Draw(Transform& transform);
 	void    Release();
-	void InitMaterial(fbxsdk::FbxNode* pNode);
 };
