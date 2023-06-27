@@ -37,6 +37,9 @@
     <Filter Include="ソース ファイル\Dice">
       <UniqueIdentifier>{5b0c5ed3-a464-4509-8da7-cb30643319be}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\Fbx">
+      <UniqueIdentifier>{e0d0d16a-45fc-4b49-92bf-4045e33f2f30}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -63,6 +66,9 @@
     <ClCompile Include="Transform.cpp">
       <Filter>ソース ファイル\Transform</Filter>
     </ClCompile>
+    <ClCompile Include="Fbx.cpp">
+      <Filter>ソース ファイル\Fbx</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Camera.h">
@@ -85,6 +91,9 @@
     </ClInclude>
     <ClInclude Include="Transform.h">
       <Filter>ソース ファイル\Transform</Filter>
+    </ClInclude>
+    <ClInclude Include="Fbx.h">
+      <Filter>ソース ファイル\Fbx</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
