@@ -1,6 +1,7 @@
 #include "Fbx.h"
 #include "Direct3D.h"
 #include "Camera.h"
+#include "Texture.h"
 
 Fbx::Fbx():
      pVertexBuffer_(nullptr), pIndexBuffer_(nullptr), pConstantBuffer_(nullptr)
@@ -32,14 +33,15 @@ HRESULT Fbx::Load(std::string fileName)
 	materialCount_ = pNode->GetMaterialCount();
 
 	//現在のカレントディレクトリを覚えておく
-	
+	char defaultCurrentDir[MAX_PATH];
+	GetCurrentDirectory(MAX_PATH, defaultCurrentDir);
 
 	//引数のfileNameからディレクトリ部分を取得
 	char dir[MAX_PATH];
-	GetCurrentDirectory(MAX_PATH, dir);
+	_splitpath_s(fileName.c_str(), nullptr, 0, dir, MAX_PATH, nullptr, 0, nullptr, 0);
 
 	//カレントディレクトリ変更
-	SetCurrentDirectory("");
+	SetCurrentDirectory(dir);
 
 	InitVertex(mesh);		//頂点バッファ準備
 	InitIndex(mesh);		//インデックスバッファ準備
@@ -47,7 +49,7 @@ HRESULT Fbx::Load(std::string fileName)
 	InitMaterial(pNode);
 	
 	//カレントディレクトリを元に戻す
-	SetCurrentDirectory(dir);
+	SetCurrentDirectory(defaultCurrentDir);
 
 	//マネージャ解放
 	pFbxManager->Destroy();
