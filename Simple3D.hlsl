@@ -40,7 +40,7 @@ VS_OUT VS(float4 pos : POSITION, float4 uv : TEXCOORD, float4 normal : NORMAL)
 	//法線を回転
 	normal = mul(normal , matW);
 
-	float4 light = float4(-1, 0.5, -0.7, 0); //光源ベクトル
+	float4 light = float4(0, 1, -1, 0); //光源ベクトル
 	light = normalize(light);
 	outData.color = clamp(dot(normal, light), 0, 1); //法線と光源をかけている
 
@@ -55,8 +55,8 @@ float4 PS(VS_OUT inData) : SV_Target
 {
 	float4 lightSource = float4(1.0, 1.0, 1.0, 1.0);
 	float4 ambentSource = float4(0.2, 0.2, 0.2, 1.0);
-	float4 diffuse = g_texture.Sample(g_sampler, inData.uv) * inData.color;
-	float4 ambient = g_texture.Sample(g_sampler, inData.uv) * ambentSource;
+	float4 diffuse = lightSource * g_texture.Sample(g_sampler, inData.uv) * inData.color;
+	float4 ambient = lightSource * g_texture.Sample(g_sampler, inData.uv) * ambentSource;
 	return lightSource * g_texture.Sample(g_sampler, inData.uv) * inData.color;
 	return g_texture.Sample(g_sampler, inData.uv);
 }
