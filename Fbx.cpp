@@ -100,7 +100,10 @@ void Fbx::InitVertex(fbxsdk::FbxMesh* mesh)
 void Fbx::InitIndex(fbxsdk::FbxMesh* mesh)
 {
 	pIndexBuffer_ = new ID3D11Buffer * [materialCount_];
-	int* index = new int[polygonCount_ * 3];
+	//int* index = new int[polygonCount_ * 3];
+	indexCount_ = vector<int>(materialCount_);
+
+	vector<int> index(polygonCount_ * 3);
 
 	for (int i = 0; i < materialCount_; i++)
 	{
@@ -121,20 +124,22 @@ void Fbx::InitIndex(fbxsdk::FbxMesh* mesh)
 					count++;
 				}
 			}
-
-			D3D11_BUFFER_DESC   bd;
-			bd.Usage = D3D11_USAGE_DEFAULT;
-			bd.ByteWidth = sizeof(int) * polygonCount_ * 3;
-			bd.BindFlags = D3D11_BIND_INDEX_BUFFER;
-			bd.CPUAccessFlags = 0;
-			bd.MiscFlags = 0;
-
-			D3D11_SUBRESOURCE_DATA InitData;
-			InitData.pSysMem = index;
-			InitData.SysMemPitch = 0;
-			InitData.SysMemSlicePitch = 0;
-			Direct3D::pDevice_->CreateBuffer(&bd, &InitData, &pIndexBuffer_[i]);
 		}
+
+		indexCount_[i] = count;
+
+		D3D11_BUFFER_DESC   bd;
+		bd.Usage = D3D11_USAGE_DEFAULT;
+		bd.ByteWidth = sizeof(int) * polygonCount_ * 3;
+		bd.BindFlags = D3D11_BIND_INDEX_BUFFER;
+		bd.CPUAccessFlags = 0;
+		bd.MiscFlags = 0;
+
+		D3D11_SUBRESOURCE_DATA InitData;
+		InitData.pSysMem = index.data();
+		InitData.SysMemPitch = 0;
+		InitData.SysMemSlicePitch = 0;
+		Direct3D::pDevice_->CreateBuffer(&bd, &InitData, &pIndexBuffer_[i]);
 	}
 }
 
@@ -232,7 +237,7 @@ void Fbx::Draw(Transform& transform)
 		}
 
 		//•`‰æ
-		Direct3D::pContext_->DrawIndexed(polygonCount_ * 3, 0, 0);
+		Direct3D::pContext_->DrawIndexed(indexCount_[i], 0, 0);
 	}
 }
 
