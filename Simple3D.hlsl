@@ -13,7 +13,7 @@ cbuffer global
 	float4x4	matWVP;			// ワールド・ビュー・プロジェクションの合成行列
 	float4x4	matW;	//ワールド行列
 	float4		diffuseColor;		// ディフューズカラー（マテリアルの色）
-	bool		isTexture;		// テクスチャ貼ってあるかどうか
+	bool		isTextured;		// テクスチャ貼ってあるかどうか
 };
 
 //───────────────────────────────────────
@@ -21,9 +21,9 @@ cbuffer global
 //───────────────────────────────────────
 struct VS_OUT
 {
-	float4 pos    : SV_POSITION;	//位置
-	float2 uv	: TEXCOORD;	//UV座標
-	float4 color	: COLOR;	//色（明るさ）
+	float4 pos    : SV_POSITION; //位置
+	float2 uv	  : TEXCOORD;	 //UV座標
+	float4 colorn : COLOR;	     //色（明るさ）
 };
 
 //───────────────────────────────────────
@@ -40,8 +40,7 @@ VS_OUT VS(float4 pos : POSITION, float4 uv : TEXCOORD, float4 normal : NORMAL)
 	outData.uv = uv;
 
 	//法線を回転
-	normal = mul(normal , matW);
-
+	normal = mul(normal , matNormal);
 	float4 light = float4(0, 1, -1, 0); //光源ベクトル
 	light = normalize(light);
 	outData.color = clamp(dot(normal, light), 0, 1); //法線と光源をかけている
@@ -55,17 +54,20 @@ VS_OUT VS(float4 pos : POSITION, float4 uv : TEXCOORD, float4 normal : NORMAL)
 //───────────────────────────────────────
 float4 PS(VS_OUT inData) : SV_Target
 {
-	if (isTexture == true)
+	float4 lightSource = float4(1.0, 1.0, 1.0, 1.0);
+	float4 ambentSource = float4(0.2, 0.2, 0.2, 1.0);
+	float4 diffuse;
+	float4 ambient;
+	if (isTextured == true)
 	{
-		float4 lightSource = float4(1.0, 1.0, 1.0, 1.0);
-		float4 ambentSource = float4(0.2, 0.2, 0.2, 1.0);
-		float4 diffuse = lightSource * g_texture.Sample(g_sampler, inData.uv) * inData.color;
-		float4 ambient = lightSource * g_texture.Sample(g_sampler, inData.uv) * ambentSource;
-		return lightSource * g_texture.Sample(g_sampler, inData.uv) * inData.color;
-		return g_texture.Sample(g_sampler, inData.uv);
+		diffuse = lightSource * g_texture.Sample(g_sampler, inData.uv)* inData.color;
+		ambient = lightSource * g_texture.Sample(g_sampler, inData.uv)* ambentSource;
 	}
 	else
 	{
-		diffuseColor;
+		diffuse = lightSource * diffuseColor * inData.color;
+		ambient = lightSource * diffuseColor * ambentSource;
     }
+
+	return diffuse + ambient;
 }
