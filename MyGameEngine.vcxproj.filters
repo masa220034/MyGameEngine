@@ -40,6 +40,9 @@
     <Filter Include="ソース ファイル\Fbx">
       <UniqueIdentifier>{e0d0d16a-45fc-4b49-92bf-4045e33f2f30}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\Input">
+      <UniqueIdentifier>{724c3064-4c3f-4a4b-a803-221f1abb6541}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -69,6 +72,9 @@
     <ClCompile Include="Fbx.cpp">
       <Filter>ソース ファイル\Fbx</Filter>
     </ClCompile>
+    <ClCompile Include="Input.cpp">
+      <Filter>ソース ファイル\Input</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Camera.h">
@@ -94,6 +100,9 @@
     </ClInclude>
     <ClInclude Include="Fbx.h">
       <Filter>ソース ファイル\Fbx</Filter>
+    </ClInclude>
+    <ClInclude Include="Input.h">
+      <Filter>ソース ファイル\Input</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
