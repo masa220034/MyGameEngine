@@ -95,11 +95,6 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInst, LPSTR lpCmdLine, 
     ZeroMemory(&msg, sizeof(msg));
     while (msg.message != WM_QUIT)
     {
-        if (Input::IsKey(DIK_ESCAPE))
-        {
-            PostQuitMessage(0);
-        }
-
         //メッセージあり
         if (PeekMessage(&msg, NULL, 0U, 0U, PM_REMOVE))
         {
