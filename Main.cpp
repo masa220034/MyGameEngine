@@ -131,7 +131,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInst, LPSTR lpCmdLine, 
 
             pFbx->Draw(diceTransform);
 
-            if (Input::IsKeyDown(DIK_ESCAPE))
+            if (Input::IsKeyUp(DIK_ESCAPE))
             {
                 static int cnt = 0;
                 cnt++;
@@ -160,6 +160,10 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 {
     switch (msg)
     {
+    case WM_MOUSEMOVE:
+        Input::SetMousePosition(LOWORD(lParam), HIWORD(lParam));
+        return 0;
+
     case WM_DESTROY:
         PostQuitMessage(0);  //ÉvÉçÉOÉâÉÄèIóπ
         return 0;
