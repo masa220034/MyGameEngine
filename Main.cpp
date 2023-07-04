@@ -1,23 +1,15 @@
 //インクルード
 #include <Windows.h>
-#include "Direct3D.h"
-//#include "Quad.h"
-#include "Dice.h"
-#include "Sprite.h"
-#include "Camera.h"
-#include "Transform.h"
-#include "Fbx.h"
-#include "Input.h"
+#include "Engine/Direct3D.h"
+#include "Engine/Camera.h"
+#include "Engine/Input.h"
+#include "Engine/RootJob"
 
-//定数宣言
 const char* WIN_CLASS_NAME = "SampleGame";  //ウィンドウクラス名
-//Quad* pQuad; //Quad型のポインタ変数
-Dice* pDice;
-Sprite* pSprite;
-Fbx* pFbx;
 const int WINDOW_WIDTH = 800;  //ウィンドウの幅
 const int WINDOW_HEIGHT = 600; //ウィンドウの高さ
-XMMATRIX m;
+
+RootJob* oRootJob = nullptr;
 
 //プロトタイプ宣言
 LRESULT CALLBACK WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
@@ -75,14 +67,6 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInst, LPSTR lpCmdLine, 
 
     Input::Initialize(hWnd);
 
-    //pQuad = new Quad;
-    //hr = pQuad->Initialize();
-    pDice = new Dice;
-    hr = pDice->Initialize();
-    pSprite = new Sprite;
-    hr = pSprite->Initialize();
-    pFbx = new Fbx;
-    pFbx->Load("Assets/Oden.fbx");
     if (FAILED(hr))
     {
         PostQuitMessage(0);
@@ -90,6 +74,8 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInst, LPSTR lpCmdLine, 
     
     Camera::Initialize();
 
+    pRootJob = new RootJob;
+    pRootJOb->Initilize();
     //メッセージループ（何か起きるのを待つ）
     MSG msg;
     ZeroMemory(&msg, sizeof(msg));
@@ -114,53 +100,10 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInst, LPSTR lpCmdLine, 
             Input::Update();
 
             //描画処理
-            static float angle = 0;
-            angle = 0.01;
-
-           
-
-            //XMMATRIX mat = XMMatrixRotationY(XMConvertToRadians(angle)) * XMMatrixTranslation(0, 3, 0);
-            /*Transform diceTransform;
-            diceTransform.position_.y = 0.0f;
-            diceTransform.rotate_.y = angle;*/
-            //pDice->Draw(diceTransform);
-
-            //mat = XMMatrixScaling(512.0f / 800.0f, 256.0f / 600.0f, 1.0f);
-            /*Transform spriteTransform;
-            spriteTransform.scale_.x = 5112.0f / 800.0f;
-            spriteTransform.scale_.y = 256.0f / 600.0f;*/
-            //pSprite->Draw(spriteTransform);
-
-            //pFbx->Draw(diceTransform);
-
-            if (Input::IsKeyUp(DIK_ESCAPE))
-            {
-                static int cnt = 0;
-                cnt++;
-                if (cnt >= 3)
-                {
-                    PostQuitMessage(0);
-                }
-            }
-
-            static Transform inputTransform;
-            if (Input::IsKey(DIK_RIGHT))
-            {
-                inputTransform.position_.x += angle;
-            }
-            if (Input::IsKey(DIK_LEFT))
-            {
-                inputTransform.position_.x -= angle;
-            }
-            pFbx->Draw(inputTransform);
             Direct3D::EndDraw();
         }
     }
-    //pQuad->Release();
-    SAFE_DELETE(pDice);
-    SAFE_DELETE(pSprite);
-    SAFE_DELETE(pFbx);
-
+ 
     Input::Release();
     Direct3D::Release();
 

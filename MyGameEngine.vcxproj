@@ -135,27 +135,17 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Camera.cpp" />
-    <ClCompile Include="Dice.cpp" />
-    <ClCompile Include="Direct3D.cpp" />
-    <ClCompile Include="Fbx.cpp" />
-    <ClCompile Include="Input.cpp" />
+    <ClCompile Include="D:\GE2A22\ツール開発\MyGameEngine\Engine\Camera.cpp" />
+    <ClCompile Include="D:\GE2A22\ツール開発\MyGameEngine\Engine\Direct3D.cpp" />
+    <ClCompile Include="D:\GE2A22\ツール開発\MyGameEngine\Engine\Fbx.cpp" />
+    <ClCompile Include="D:\GE2A22\ツール開発\MyGameEngine\Engine\GameObject.cpp" />
+    <ClCompile Include="D:\GE2A22\ツール開発\MyGameEngine\Engine\Input.cpp" />
+    <ClCompile Include="D:\GE2A22\ツール開発\MyGameEngine\Engine\Quad.cpp" />
+    <ClCompile Include="D:\GE2A22\ツール開発\MyGameEngine\Engine\RootJob.cpp" />
+    <ClCompile Include="D:\GE2A22\ツール開発\MyGameEngine\Engine\Sprite.cpp" />
+    <ClCompile Include="D:\GE2A22\ツール開発\MyGameEngine\Engine\Texture.cpp" />
+    <ClCompile Include="D:\GE2A22\ツール開発\MyGameEngine\Engine\Transform.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Quad.cpp" />
-    <ClCompile Include="Sprite.cpp" />
-    <ClCompile Include="Texture.cpp" />
-    <ClCompile Include="Transform.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="Camera.h" />
-    <ClInclude Include="Dice.h" />
-    <ClInclude Include="Direct3D.h" />
-    <ClInclude Include="Fbx.h" />
-    <ClInclude Include="Input.h" />
-    <ClInclude Include="Quad.h" />
-    <ClInclude Include="Sprite.h" />
-    <ClInclude Include="Texture.h" />
-    <ClInclude Include="Transform.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Simple2D.hlsl">
@@ -177,6 +167,18 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="D:\GE2A22\ツール開発\MyGameEngine\Engine\Camera.h" />
+    <ClInclude Include="D:\GE2A22\ツール開発\MyGameEngine\Engine\Direct3D.h" />
+    <ClInclude Include="D:\GE2A22\ツール開発\MyGameEngine\Engine\Fbx.h" />
+    <ClInclude Include="D:\GE2A22\ツール開発\MyGameEngine\Engine\GameObject.h" />
+    <ClInclude Include="D:\GE2A22\ツール開発\MyGameEngine\Engine\Input.h" />
+    <ClInclude Include="D:\GE2A22\ツール開発\MyGameEngine\Engine\Quad.h" />
+    <ClInclude Include="D:\GE2A22\ツール開発\MyGameEngine\Engine\RootJob.h" />
+    <ClInclude Include="D:\GE2A22\ツール開発\MyGameEngine\Engine\Sprite.h" />
+    <ClInclude Include="D:\GE2A22\ツール開発\MyGameEngine\Engine\Texture.h" />
+    <ClInclude Include="D:\GE2A22\ツール開発\MyGameEngine\Engine\Transform.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
