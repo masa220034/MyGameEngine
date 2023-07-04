@@ -95,11 +95,6 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInst, LPSTR lpCmdLine, 
     ZeroMemory(&msg, sizeof(msg));
     while (msg.message != WM_QUIT)
     {
-        if (Input::IsKey(DIK_ESCAPE))
-        {
-            PostQuitMessage(0);
-        }
-
         //メッセージあり
         if (PeekMessage(&msg, NULL, 0U, 0U, PM_REMOVE))
         {
@@ -111,11 +106,12 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInst, LPSTR lpCmdLine, 
         else
         {
             //更新
-            Input::Update();
             Camera::Update();
 
             //ゲームの処理
             Direct3D::BeginDraw();
+
+            Input::Update();
 
             //描画処理
             static float angle = 0;
@@ -134,6 +130,16 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInst, LPSTR lpCmdLine, 
             //pSprite->Draw(spriteTransform);
 
             pFbx->Draw(diceTransform);
+
+            if (Input::IsKeyDown(DIK_ESCAPE))
+            {
+                static int cnt = 0;
+                cnt++;
+                if (cnt >= 3)
+                {
+                    PostQuitMessage(0);
+                }
+            }
 
             Direct3D::EndDraw();
         }
