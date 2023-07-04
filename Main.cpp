@@ -115,21 +115,23 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInst, LPSTR lpCmdLine, 
 
             //•`‰æˆ—
             static float angle = 0;
-            angle += 0.05;
+            angle = 0.01;
+
+           
 
             //XMMATRIX mat = XMMatrixRotationY(XMConvertToRadians(angle)) * XMMatrixTranslation(0, 3, 0);
-            Transform diceTransform;
+            /*Transform diceTransform;
             diceTransform.position_.y = 0.0f;
-            diceTransform.rotate_.y = angle;;
+            diceTransform.rotate_.y = angle;*/
             //pDice->Draw(diceTransform);
 
             //mat = XMMatrixScaling(512.0f / 800.0f, 256.0f / 600.0f, 1.0f);
-            Transform spriteTransform;
+            /*Transform spriteTransform;
             spriteTransform.scale_.x = 5112.0f / 800.0f;
-            spriteTransform.scale_.y = 256.0f / 600.0f;
+            spriteTransform.scale_.y = 256.0f / 600.0f;*/
             //pSprite->Draw(spriteTransform);
 
-            pFbx->Draw(diceTransform);
+            //pFbx->Draw(diceTransform);
 
             if (Input::IsKeyUp(DIK_ESCAPE))
             {
@@ -141,6 +143,16 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInst, LPSTR lpCmdLine, 
                 }
             }
 
+            static Transform inputTransform;
+            if (Input::IsKey(DIK_RIGHT))
+            {
+                inputTransform.position_.x += angle;
+            }
+            if (Input::IsKey(DIK_LEFT))
+            {
+                inputTransform.position_.x -= angle;
+            }
+            pFbx->Draw(inputTransform);
             Direct3D::EndDraw();
         }
     }
