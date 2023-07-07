@@ -13,7 +13,7 @@ Player::~Player()
 void Player::Initialize()
 {
 	pFbx = new Fbx;
-	pFbx->Load("Assets/oden.fbx");
+	pFbx->Load("Assets/Oden.fbx");
 	this->transform_.scale_.x = 0.5;
 	this->transform_.scale_.y = 0.5;
 	this->transform_.scale_.z = 0.5;
