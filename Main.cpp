@@ -3,13 +3,13 @@
 #include "Engine/Direct3D.h"
 #include "Engine/Camera.h"
 #include "Engine/Input.h"
-#include "Engine/RootJob"
+#include "Engine/RootJob.h"
 
 const char* WIN_CLASS_NAME = "SampleGame";  //ウィンドウクラス名
 const int WINDOW_WIDTH = 800;  //ウィンドウの幅
 const int WINDOW_HEIGHT = 600; //ウィンドウの高さ
 
-RootJob* oRootJob = nullptr;
+RootJob* pRootJob = nullptr;
 
 //プロトタイプ宣言
 LRESULT CALLBACK WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
@@ -75,7 +75,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInst, LPSTR lpCmdLine, 
     Camera::Initialize();
 
     pRootJob = new RootJob;
-    pRootJOb->Initilize();
+    pRootJob->Initialize();
     //メッセージループ（何か起きるのを待つ）
     MSG msg;
     ZeroMemory(&msg, sizeof(msg));
@@ -93,17 +93,19 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInst, LPSTR lpCmdLine, 
         {
             //更新
             Camera::Update();
+            Input::Update();
+            pRootJob->Update();
 
             //ゲームの処理
             Direct3D::BeginDraw();
 
-            Input::Update();
+            pRootJob->Draw();
 
             //描画処理
             Direct3D::EndDraw();
         }
     }
- 
+    pRootJob->Release();
     Input::Release();
     Direct3D::Release();
 
