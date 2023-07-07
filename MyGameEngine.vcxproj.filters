@@ -61,6 +61,9 @@
     <ClCompile Include="D:\GE2A22\ツール開発\MyGameEngine\Engine\RootJob.cpp">
       <Filter>ソース ファイル\Engine</Filter>
     </ClCompile>
+    <ClCompile Include="PlayScene.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="D:\GE2A22\ツール開発\MyGameEngine\Engine\Camera.h">
@@ -92,6 +95,9 @@
     </ClInclude>
     <ClInclude Include="D:\GE2A22\ツール開発\MyGameEngine\Engine\RootJob.h">
       <Filter>ヘッダー ファイル\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayScene.h">
+      <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
