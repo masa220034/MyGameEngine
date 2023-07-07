@@ -99,7 +99,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInst, LPSTR lpCmdLine, 
             //ƒQ[ƒ€‚Ìˆ—
             Direct3D::BeginDraw();
 
-            pRootJob->Draw();
+            pRootJob->DrawSub();
 
             //•`‰æˆ—
             Direct3D::EndDraw();

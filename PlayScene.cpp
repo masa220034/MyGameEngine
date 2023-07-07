@@ -8,15 +8,16 @@ PlayScene::PlayScene(GameObject* parent)
 
 void PlayScene::Initialize()
 {
-	Player* pPlayer;
-	pPlayer = new Player(this);
-	pPlayer->Initialize();
-	childList_.push_back(pPlayer);
-
+	//Player* pPlayer;
+	//pPlayer = new Player(this); //プレイヤーの親は自分(PlayaScene)
+	//pPlayer->Initialize();
+	//childList_.push_back(pPlayer); //PlaySceneの子として、プレイヤーを登録
+	Instantiate<PlayScene>(this);
 }
 
 void PlayScene::Update()
 {
+	this->transform_.rotate_.y += 1;
 }
 
 void PlayScene::Draw()
