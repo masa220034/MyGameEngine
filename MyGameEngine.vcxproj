@@ -146,6 +146,7 @@
     <ClCompile Include="D:\GE2A22\ツール開発\MyGameEngine\Engine\Texture.cpp" />
     <ClCompile Include="D:\GE2A22\ツール開発\MyGameEngine\Engine\Transform.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayScene.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -180,6 +181,7 @@
     <ClInclude Include="D:\GE2A22\ツール開発\MyGameEngine\Engine\Sprite.h" />
     <ClInclude Include="D:\GE2A22\ツール開発\MyGameEngine\Engine\Texture.h" />
     <ClInclude Include="D:\GE2A22\ツール開発\MyGameEngine\Engine\Transform.h" />
+    <ClInclude Include="Player.h" />
     <ClInclude Include="PlayScene.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
