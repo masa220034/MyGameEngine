@@ -17,6 +17,6 @@ void GameObject::DrawSub()
 	Draw();
 	for (auuto itr = childList_.begin(); itr != childList_.end(); itr++)
 	{
-		(*itr)->
+		(*itr)->DrawSub();
 	}
 }
