@@ -1,10 +1,12 @@
 #include "GameObject.h"
 
 GameObject::GameObject()
+	:pParent_(nullptr)
 {
 }
 
 GameObject::GameObject(GameObject* parent, const std::string& name)
+	:pParent_(nullptr)
 {
 }
 
@@ -38,7 +40,7 @@ void GameObject::UpdateSub()
 
 void GameObject::ReleaseSub()
 {
-	Relese();
+	Release();
 	for (auto itr = childList_.begin(); itr != childList_.end(); itr++)
 	{
 		(*itr)->ReleaseSub();
@@ -51,8 +53,4 @@ void GameObject::KillMe()
 
 bool GameObject::IsDead()
 {
-	if (KillMe())
-	{
-		IsDead = true;
-	}
 }

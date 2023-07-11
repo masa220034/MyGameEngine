@@ -32,9 +32,9 @@ public:
 	template<class T>
 	void Instantiate(GameObject* parent)
 	{
-		T* p;
-		p = new T(parent);
-		p->Initialize();
-		childList_.push_back(p);
+		T* pObject;
+		pObject = new T(parent);
+		pObject->Initialize();
+		childList_.push_back(pObject);
 	}
 };
