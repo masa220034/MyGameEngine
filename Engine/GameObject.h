@@ -32,11 +32,12 @@ public:
 	void ReleaseSub();
 	void KillMe();
 	template<class T>
-	void Instantiate(GameObject* parent)
+	GameObject* Instantiate(GameObject* parent)
 	{
 		T* pObject;
 		pObject = new T(parent);
 		pObject->Initialize();
 		childList_.push_back(pObject);
+		return pObject;
 	}
 };

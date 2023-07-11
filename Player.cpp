@@ -1,5 +1,7 @@
 #include "Player.h"
 #include "Engine/Fbx.h"
+#include "Childoden.h"
+#include "Engine/Input.h"
 
 Player::Player(GameObject* parent)
 	:GameObject(parent, "Player"), pFbx(nullptr)
@@ -22,6 +24,14 @@ void Player::Initialize()
 void Player::Update()
 {
 	transform_.rotate_.y++;
+	if (Input::IsKey(DIK_LEFT))
+	{
+		transform_.position_.x -= 0.1f;
+	}
+	if (Input::IsKey(DIK_RIGHT))
+	{
+		transform_.position_.x += 0.1f;
+	}
 }
 
 void Player::Draw()

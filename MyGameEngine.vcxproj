@@ -135,6 +135,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Childoden.cpp" />
     <ClCompile Include="D:\GE2A22\ツール開発\MyGameEngine\Engine\Camera.cpp" />
     <ClCompile Include="D:\GE2A22\ツール開発\MyGameEngine\Engine\Direct3D.cpp" />
     <ClCompile Include="D:\GE2A22\ツール開発\MyGameEngine\Engine\Fbx.cpp" />
@@ -171,6 +172,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Childoden.h" />
     <ClInclude Include="D:\GE2A22\ツール開発\MyGameEngine\Engine\Camera.h" />
     <ClInclude Include="D:\GE2A22\ツール開発\MyGameEngine\Engine\Direct3D.h" />
     <ClInclude Include="D:\GE2A22\ツール開発\MyGameEngine\Engine\Fbx.h" />
