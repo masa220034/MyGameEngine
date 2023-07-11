@@ -25,7 +25,7 @@ void GameObject::DrawSub()
 
 void GameObject::UpdateSub()
 {
-	Update();//UpdateŠÖ”‚ðŒÄ‚ñ‚Å‚é
+	Update();
 	for (auto itr = childList_.begin(); itr != childList_.end(); itr++)
 	{
 		(*itr)->UpdateSub();
@@ -37,6 +37,20 @@ void GameObject::ReleaseSub()
 	Release();
 	for (auto itr = childList_.begin(); itr != childList_.end(); itr++)
 	{
-		(*itr)->ReleaseSub();
+		if ((*itr)->IsDead == true)
+		{
+			(*itr)->ReleaseSub();
+			SAFE_DELETE(*itr);
+			itr = childList_.erase(itr);
+		}
+		else
+		{
+			itr++;
+		}
 	}
+}
+
+void GameObject::KillMe()
+{
+	IsDead = true;
 }
