@@ -21,6 +21,11 @@ void Player::Initialize()
 
 void Player::Update()
 {
+	transform_.rotate_.y++;
+}
+
+void Player::Draw()
+{
 	pFbx->Draw(transform_);
 }
 
