@@ -29,12 +29,6 @@ void GameObject::UpdateSub()
 	for (auto itr = childList_.begin(); itr != childList_.end(); itr++)
 	{
 		(*itr)->UpdateSub();
-		/*if ((*itr)->IsDead() == true)
-		{
-			(*itr)->ReleaseSub();
-			SAFE_DELETE(*itr);
-			itr = childList_.erase(itr);
-		}*/
 	}
 }
 
@@ -46,11 +40,3 @@ void GameObject::ReleaseSub()
 		(*itr)->ReleaseSub();
 	}
 }
-
-/*void GameObject::KillMe()
-{
-}
-
-bool GameObject::IsDead()
-{
-}*/
