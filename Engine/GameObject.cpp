@@ -45,14 +45,14 @@ void GameObject::ReleaseSub()
 	}
 }
 
+void GameObject::KillMe()
+{
+}
+
 bool GameObject::IsDead()
 {
 	if (KillMe())
 	{
 		IsDead = true;
 	}
-}
-
-void GameObject::KillMe()
-{
 }
