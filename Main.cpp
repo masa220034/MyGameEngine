@@ -68,18 +68,14 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInst, LPSTR lpCmdLine, 
     {
         PostQuitMessage(0);
     }
-
-    Input::Initialize(hWnd);
-
-    if (FAILED(hr))
-    {
-        PostQuitMessage(0);
-    }
     
     Camera::Initialize();
 
+    Input::Initialize(hWnd);
+
     pRootJob = new RootJob;
     pRootJob->Initialize();
+
     //メッセージループ（何か起きるのを待つ）
     MSG msg;
     ZeroMemory(&msg, sizeof(msg));
