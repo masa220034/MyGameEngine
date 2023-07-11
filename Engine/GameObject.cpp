@@ -6,7 +6,7 @@ GameObject::GameObject()
 }
 
 GameObject::GameObject(GameObject* parent, const std::string& name)
-	:pParent_(nullptr)
+	:pParent_(nullptr),IsDead(false)
 {
 }
 
@@ -30,12 +30,7 @@ void GameObject::UpdateSub()
 	{
 		(*itr)->UpdateSub();
 	}
-}
-
-void GameObject::ReleaseSub()
-{
-	Release();
-	for (auto itr = childList_.begin(); itr != childList_.end(); itr++)
+	for (auto itr = childList_.begin(); itr != childList_.end();)
 	{
 		if ((*itr)->IsDead == true)
 		{
@@ -47,6 +42,15 @@ void GameObject::ReleaseSub()
 		{
 			itr++;
 		}
+	}
+}
+
+void GameObject::ReleaseSub()
+{
+	Release();
+	for (auto itr = childList_.begin(); itr != childList_.end(); itr++)
+	{
+		(*itr)->ReleaseSub();
 	}
 }
 
