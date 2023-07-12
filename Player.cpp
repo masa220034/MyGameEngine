@@ -19,6 +19,9 @@ void Player::Initialize()
 	this->transform_.scale_.x = 0.5;
 	this->transform_.scale_.y = 0.5;
 	this->transform_.scale_.z = 0.5;
+	Instantiate<Childoden>(this);
+	GameObject* pCO2 = Instantiate<Childoden>(this);
+	pCO2->transform_.position_
 }
 
 void Player::Update()

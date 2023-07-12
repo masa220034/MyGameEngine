@@ -6,8 +6,12 @@ GameObject::GameObject()
 }
 
 GameObject::GameObject(GameObject* parent, const std::string& name)
-	:pParent_(nullptr),IsDead(false)
+	:pParent_(nullptr),objectName_(name),IsDead(false)
 {
+	if (parent != nullptr)
+	{
+		this->transform_.pParent_ = &(parent->transform_);
+	}
 }
 
 GameObject::~GameObject()

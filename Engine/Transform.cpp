@@ -16,20 +16,32 @@ Transform::~Transform()
 
 void Transform::Calclation()
 {
+    //移動行列作成
     matTranslate_ = XMMatrixTranslation(position_.x, position_.y, position_.z);
 
+    //回転行列作成
     XMMATRIX rotateX, rotateY, rotateZ;
     rotateX = XMMatrixRotationX(XMConvertToRadians(rotate_.x));
     rotateY = XMMatrixRotationY(XMConvertToRadians(rotate_.y));
     rotateZ = XMMatrixRotationZ(XMConvertToRadians(rotate_.z));
     matRotate_ = rotateZ * rotateX * rotateY;
 
+    //拡大行列作成
     matScale_ = XMMatrixScaling(scale_.x, scale_.y, scale_.z);
 }
 
 XMMATRIX Transform::GetWorldMatrix()
 {
-    return matScale_ * matRotate_ * matTranslate_;
+    if (pParent_ != nullptr)
+    {
+        //親があったら親のWorldMatrixを掛ける
+        return pParent_->GetWorldMatrix() * matScale_ * matRotate_ * matTranslate_;
+    }
+    else
+    {
+        //親がnullptrの時は、子の変換だけ
+        return matScale_ * matRotate_ * matTranslate_;
+    }
 }
 
 XMMATRIX Transform::GetNormalMatrix()
