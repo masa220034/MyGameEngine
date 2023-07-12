@@ -23,7 +23,11 @@ void Childoden::Initialize()
 
 void Childoden::Update()
 {
-	//transform_.rotate_.y++;
+	transform_.rotate_.y++;
+	if (transform_.rotate_.y > 200)
+	{
+		KillMe();
+	}
 }
 
 void Childoden::Draw()
@@ -33,6 +37,4 @@ void Childoden::Draw()
 
 void Childoden::Release()
 {
-	pFbx->Release();
-	delete pFbx;
 }

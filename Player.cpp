@@ -20,20 +20,16 @@ void Player::Initialize()
 	this->transform_.scale_.y = 0.5;
 	this->transform_.scale_.z = 0.5;
 	Instantiate<Childoden>(this);
-	GameObject* pCO2 = Instantiate<Childoden>(this);
-	pCO2->transform_.position_
+	GameObject* pChildOden2 = Instantiate<Childoden>(this);
+	pChildOden2->SetPosition(-2, 1, 0);
 }
 
 void Player::Update()
 {
 	transform_.rotate_.y++;
-	if (Input::IsKey(DIK_LEFT))
+	if (transform_.rotate_.y > 600)
 	{
-		transform_.position_.x -= 0.1f;
-	}
-	if (Input::IsKey(DIK_RIGHT))
-	{
-		transform_.position_.x += 0.1f;
+		KillMe();
 	}
 }
 
