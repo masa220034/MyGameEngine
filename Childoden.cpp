@@ -2,7 +2,7 @@
 #include "Engine/Fbx.h"
 
 Childoden::Childoden(GameObject* parent)
-	:GameObject(parent, "Childoden")
+	:GameObject(parent, "ChildOden")
 {
 }
 

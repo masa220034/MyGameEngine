@@ -10,7 +10,7 @@ using std::list;
 
 class GameObject
 {
-	bool IsDead;
+	bool IsDead_;
 
 protected:
 	list<GameObject *> childList_;
@@ -33,6 +33,7 @@ public:
 	void KillMe();
 	void SetPosition(XMFLOAT3 position);
 	void SetPosition(float x, float y, float z);
+	
 	template<class T>
 	GameObject* Instantiate(GameObject* parent)
 	{

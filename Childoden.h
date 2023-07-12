@@ -10,9 +10,9 @@ class Childoden :
 public:
     Childoden(GameObject* parent);
     ~Childoden();
-    void Initialize();
-    void Update();
-    void Draw();
-    void Release();
+    void Initialize() override;
+    void Update() override;
+    void Draw() override;
+    void Release() override;
 };
 
