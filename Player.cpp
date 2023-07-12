@@ -40,6 +40,6 @@ void Player::Draw()
 
 void Player::Release()
 {
-	pFbx->Release();
-	delete pFbx;
+	//pFbx->Release();
+	//delete pFbx;
 }
