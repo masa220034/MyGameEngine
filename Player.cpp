@@ -2,7 +2,7 @@
 #include "Engine/Fbx.h"
 #include "Childoden.h"
 #include "Engine/Input.h"
-#include "Model.h"
+#include "Engine/Model.h"
 
 Player::Player(GameObject* parent)
 	:GameObject(parent, "Player"), hModel_(-1)

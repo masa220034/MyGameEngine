@@ -146,8 +146,8 @@
     <ClCompile Include="D:\GE2A22\ツール開発\MyGameEngine\Engine\Sprite.cpp" />
     <ClCompile Include="D:\GE2A22\ツール開発\MyGameEngine\Engine\Texture.cpp" />
     <ClCompile Include="D:\GE2A22\ツール開発\MyGameEngine\Engine\Transform.cpp" />
+    <ClCompile Include="Engine\Model.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Model.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayScene.cpp" />
   </ItemGroup>
@@ -184,7 +184,7 @@
     <ClInclude Include="D:\GE2A22\ツール開発\MyGameEngine\Engine\Sprite.h" />
     <ClInclude Include="D:\GE2A22\ツール開発\MyGameEngine\Engine\Texture.h" />
     <ClInclude Include="D:\GE2A22\ツール開発\MyGameEngine\Engine\Transform.h" />
-    <ClInclude Include="Model.h" />
+    <ClInclude Include="Engine\Model.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="PlayScene.h" />
   </ItemGroup>
