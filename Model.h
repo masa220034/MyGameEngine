@@ -15,6 +15,5 @@ namespace Model
 	int Load(std::string FileName);
 	void SetTransform(int hModel, Transform transfrom);
 	void Draw(int hModel);
-	//Model‚Ìƒ|ƒCƒ“ƒ^‚ğ‚Ô‚¿‚ñ‚Å‚¨‚­vector
-	std::vector<ModelData*> modelList;
+	void Release();
 }

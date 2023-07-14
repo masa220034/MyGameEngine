@@ -6,6 +6,7 @@ class Fbx;
 class Player :
     public GameObject
 {
+    int hModel_;
     Fbx* pFbx;
 public:
     //コンストラクタ

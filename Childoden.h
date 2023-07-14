@@ -6,6 +6,7 @@ class Fbx;
 class Childoden :
     public GameObject
 {
+    int hModel_;
     Fbx* pFbx;
 public:
     Childoden(GameObject* parent);
