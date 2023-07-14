@@ -17,17 +17,22 @@ void Childoden::Initialize()
 	transform_.scale_.x = 0.2f;
 	transform_.scale_.y = 0.2f;
 	transform_.scale_.z = 0.2f;
-	transform_.position_.x = 2.0f;
-	transform_.position_.y = 1.0f;
+	//transform_.position_.x = 2.0f;
+	//transform_.position_.y = 1.0f;
 }
 
 void Childoden::Update()
 {
 	transform_.rotate_.y++;
-	if (transform_.rotate_.y > 200)
+	transform_.position_.z += 0.5f;
+	if (transform_.position_.z > 50)
 	{
 		KillMe();
 	}
+	//if (transform_.rotate_.y > 200)
+	//{
+	//	KillMe();
+	//}
 }
 
 void Childoden::Draw()
