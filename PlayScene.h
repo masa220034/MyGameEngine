@@ -8,7 +8,7 @@ class PlayScene :
 {
 public:
     //コンストラクタ
-    //引数：parent  親オブジェクト（SceneManager）
+    //引数：parent
     PlayScene(GameObject* parent);
 
     //初期化
