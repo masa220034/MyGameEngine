@@ -74,7 +74,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInst, LPSTR lpCmdLine, 
 
     Input::Initialize(hWnd);
 
-    pRootJob = new RootJob;
+    pRootJob = new RootJob(nullptr);
     pRootJob->Initialize();
 
     //メッセージループ（何か起きるのを待つ）
