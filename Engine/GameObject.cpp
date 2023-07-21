@@ -1,4 +1,5 @@
 #include "GameObject.h"
+#include "SphereCollider.h"
 
 GameObject::GameObject()
 	:pParent_(nullptr), IsDead_(false)
@@ -6,7 +7,7 @@ GameObject::GameObject()
 }
 
 GameObject::GameObject(GameObject* parent, const std::string& name)
-	:pParent_(parent),objectName_(name),IsDead_(false)
+	:pParent_(parent),objectName_(name),IsDead_(false), pCollider_(nullptr)
 {
 	if (parent != nullptr)
 	{
@@ -30,6 +31,8 @@ void GameObject::DrawSub()
 void GameObject::UpdateSub()
 {
 	Update();
+
+	RoundRobin(GetRootJob());
 	for (auto itr = childList_.begin(); itr != childList_.end(); itr++)
 	{
 		(*itr)->UpdateSub();
@@ -115,4 +118,50 @@ GameObject* GameObject::GetRootJob()
 GameObject* GameObject::FindObject(string _objName)
 {
 	return GetRootJob()->FindChildObject(_objName);
+}
+
+void GameObject::AddCollider(SphereCollider* pCollider)
+{
+	pCollider_ = pCollider;
+}
+
+void GameObject::Collision(GameObject* pTarget)
+{
+	if (pTarget->pCollider_ == nullptr)
+	{
+		return; //TargetにColliderがアタッチされていない
+	}
+
+	/*XMVECTOR v{transform_.position_.x - pTarget->transform_.position_.x,
+				transform_.position_.y - pTarget->transform_.position_.y,
+				transform_.position_.z - pTarget->transform_.position_.z,
+				 0 };
+	XMVECTOR dist = XMVector3Dot(v, v);*/
+	float dist = (transform_.position_.x - pTarget->transform_.position_.x) * (transform_.position_.x - pTarget->transform_.position_.x)
+		+ (transform_.position_.y - pTarget->transform_.position_.y) * (transform_.position_.y - pTarget->transform_.position_.y)
+		+ (transform_.position_.z - pTarget->transform_.position_.z) * (transform_.position_.z - pTarget->transform_.position_.z);
+	float rDist = (this->pCollider_->GetRadius() + pTarget->pCollider_->GetRadius()) * (this->pCollider_->GetRadius() + pTarget->pCollider_->GetRadius());
+
+	if (dist <= rDist)
+	{
+		double p = 0;
+	}
+}
+
+void GameObject::RoundRobin(GameObject* pTarget)
+{
+	if (pCollider_ == nullptr)
+	{
+		return;
+	}
+
+	if (pTarget->pCollider_ != nullptr) //自分とTarget
+	{
+		Collision(pTarget);
+	}
+
+	for (auto itr:pTarget->childList_)
+	{
+		RoundRobin(itr);
+	}
 }
