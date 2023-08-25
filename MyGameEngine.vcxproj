@@ -24,6 +24,7 @@
     <ProjectGuid>{ab4e6667-cafe-4d23-b121-6f68cae93b59}</ProjectGuid>
     <RootNamespace>MyGameEngine</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <ProjectName>MapEditer</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -135,7 +136,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Childoden.cpp" />
     <ClCompile Include="D:\GE2A22\ツール開発\MyGameEngine\Engine\Camera.cpp" />
     <ClCompile Include="D:\GE2A22\ツール開発\MyGameEngine\Engine\Direct3D.cpp" />
     <ClCompile Include="D:\GE2A22\ツール開発\MyGameEngine\Engine\Fbx.cpp" />
@@ -146,13 +146,10 @@
     <ClCompile Include="D:\GE2A22\ツール開発\MyGameEngine\Engine\Sprite.cpp" />
     <ClCompile Include="D:\GE2A22\ツール開発\MyGameEngine\Engine\Texture.cpp" />
     <ClCompile Include="D:\GE2A22\ツール開発\MyGameEngine\Engine\Transform.cpp" />
-    <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="Engine\Model.cpp" />
     <ClCompile Include="Engine\SceneManager.cpp" />
     <ClCompile Include="Engine\SphereCollider.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Player.cpp" />
-    <ClCompile Include="PlayScene.cpp" />
     <ClCompile Include="TestScene.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -177,7 +174,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Childoden.h" />
     <ClInclude Include="D:\GE2A22\ツール開発\MyGameEngine\Engine\Camera.h" />
     <ClInclude Include="D:\GE2A22\ツール開発\MyGameEngine\Engine\Direct3D.h" />
     <ClInclude Include="D:\GE2A22\ツール開発\MyGameEngine\Engine\Fbx.h" />
@@ -188,12 +184,9 @@
     <ClInclude Include="D:\GE2A22\ツール開発\MyGameEngine\Engine\Sprite.h" />
     <ClInclude Include="D:\GE2A22\ツール開発\MyGameEngine\Engine\Texture.h" />
     <ClInclude Include="D:\GE2A22\ツール開発\MyGameEngine\Engine\Transform.h" />
-    <ClInclude Include="Enemy.h" />
     <ClInclude Include="Engine\Model.h" />
     <ClInclude Include="Engine\SceneManager.h" />
     <ClInclude Include="Engine\SphereCollider.h" />
-    <ClInclude Include="Player.h" />
-    <ClInclude Include="PlayScene.h" />
     <ClInclude Include="TestScene.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
