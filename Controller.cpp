@@ -58,6 +58,7 @@ void Controller::Update()
         }
     }
 
+    //X軸の回転行列
     XMMATRIX mRotateX = XMMatrixRotationX(XMConvertToRadians(transform_.rotate_.x));
 
     //現在位置をベクトルにしておく
