@@ -1,6 +1,16 @@
 #include "Stage.h"
 #include "Engine/Model.h"
 
+void Stage::SetBlock(int _x, int _z, BLOCKTYPE _type)
+{
+    table_[_x][_z].type = _type;
+}
+
+void Stage::SetBlockHeight(int _x, int _z, int _height)
+{
+    table_[_x][_z].height = _height;
+}
+
 //コンストラクタ
 Stage::Stage(GameObject* parent)
     :GameObject(parent, "Stage"), hModel_{-1, -1, -1, -1, -1}
@@ -8,6 +18,10 @@ Stage::Stage(GameObject* parent)
     for (int i = 0; i < MODEL_NUM; i++)
     {
         hModel_[i] = -1;
+    }
+    for (int z = 0; z < ZSIZE; z++)
+    {
+
     }
 }
 
@@ -42,7 +56,6 @@ void Stage::Initialize()
             table_[x][z] = x % 5;
         }
     }
-    table_[3][5] = GRASS;
 }
 
 //更新
@@ -59,11 +72,15 @@ void Stage::Draw()
     {
         for (int z = 0; z < 15; z++)
         {
-            Transform trans;
-            trans.position_.x = x;
-            trans.position_.z = z;
-            Model::SetTransform(hModel_[(x + z) % 5], trans);
-            Model::Draw(hModel_[(x + z) % 5]);
+            for (int y = 0; y < table_[x][z].height + 1; y++)
+            {
+                Transform trans;
+                trans.position_.x = x;
+                trans.position_.y = y;
+                trans.position_.z = z;
+                Model::SetTransform(hModel_[type], trans);
+                Model::Draw(hModel_[type]);
+            }
         }
     }
 }

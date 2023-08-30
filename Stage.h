@@ -15,8 +15,17 @@ namespace {
 class Stage : public GameObject
 {
     int hModel_[MODEL_NUM];
-    int table_[XSIZE][ZSIZE];
+    //int table_[XSIZE][ZSIZE];
+    struct
+    {
+        int type;
+        int height;
+    } table_[XSIZE][ZSIZE];
+
 public:
+    void SetBlock(int _x, int _z, BLOCKTYPE _type);
+    void SetBlockHeight(int _x, int _z, int _height);
+
     //コンストラクタ
     Stage(GameObject* parent);
 
