@@ -13,7 +13,7 @@ void Stage::SetBlockHeight(int _x, int _z, int _height)
 
 //コンストラクタ
 Stage::Stage(GameObject* parent)
-    :GameObject(parent, "Stage"), hModel_{-1, -1, -1, -1, -1}
+    :GameObject(parent, "Stage")
 {
     for (int i = 0; i < MODEL_NUM; i++)
     {
@@ -21,7 +21,10 @@ Stage::Stage(GameObject* parent)
     }
     for (int z = 0; z < ZSIZE; z++)
     {
-
+        for (int x = 0; x < MODEL_NUM; x++)
+        {
+            SetBlock(x, z, DEFAULT);
+        }
     }
 }
 
@@ -53,7 +56,8 @@ void Stage::Initialize()
     {
         for (int x = 0; x < XSIZE; x++)
         {
-            table_[x][z] = x % 5;
+            SetBlock(x, z, (BLOCKTYPE)(z % 5));
+            SetBlockHeight(x, z, x % 5);
         }
     }
 }
@@ -74,6 +78,7 @@ void Stage::Draw()
         {
             for (int y = 0; y < table_[x][z].height + 1; y++)
             {
+                int type = table_[x][z].type;
                 Transform trans;
                 trans.position_.x = x;
                 trans.position_.y = y;

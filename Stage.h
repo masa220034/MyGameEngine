@@ -7,7 +7,7 @@ namespace {
     const int ZSIZE = 15;
     enum BLOCKTYPE
     {
-        DEFAULT,BRICK,GRASS,SAND,WATER
+        DEFAULT, BRICK, GRASS, SAND, WATER
     };
 }
 
@@ -20,7 +20,7 @@ class Stage : public GameObject
     {
         int type;
         int height;
-    } table_[XSIZE][ZSIZE];
+    } table_[15][15];
 
 public:
     void SetBlock(int _x, int _z, BLOCKTYPE _type);
