@@ -70,14 +70,14 @@
     <ClCompile Include="Engine\Transform.cpp">
       <Filter>ソース ファイル\Engine</Filter>
     </ClCompile>
-    <ClCompile Include="Model.cpp">
-      <Filter>ソース ファイル</Filter>
+    <ClCompile Include="Engine\Model.cpp">
+      <Filter>ソース ファイル\Engine</Filter>
     </ClCompile>
-    <ClCompile Include="SceneManager.cpp">
-      <Filter>ソース ファイル</Filter>
+    <ClCompile Include="Engine\SceneManager.cpp">
+      <Filter>ソース ファイル\Engine</Filter>
     </ClCompile>
-    <ClCompile Include="SphereCollider.cpp">
-      <Filter>ソース ファイル</Filter>
+    <ClCompile Include="Engine\SphereCollider.cpp">
+      <Filter>ソース ファイル\Engine</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
