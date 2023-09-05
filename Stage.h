@@ -22,6 +22,9 @@ class Stage : public GameObject
         int height;
     } table_[15][15];
 
+    int mode_;     //0:ã‚°‚é, 1:‰º‚°‚é, 2:í—Ş•Ï‚¦‚é
+    int select_;   //í—Ş
+
 public:
     void SetBlock(int _x, int _z, BLOCKTYPE _type);
     void SetBlockHeight(int _x, int _z, int _height);
@@ -43,5 +46,7 @@ public:
 
     //ŠJ•ú
     void Release() override;
+
+    BOOL DialogProc(HWND hDlg, UINT msg, WPARAM wParam, LPARAM lParam);
 };
 

@@ -9,6 +9,7 @@
 #include <DirectXCollision.h>
 
 #include "resource.h"
+#include "Stage.h"
 
 #pragma comment(lib, "winmm.lib")
 
@@ -84,6 +85,10 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInst, LPSTR lpCmdLine, 
         PostQuitMessage(0);
     }
     
+    Fbx* pFbx = new Fbx;
+    pFbx->Load("Assets/BoxBrick.fbx");
+    RayCastData data;
+    data.start
     Camera::Initialize();
 
     Input::Initialize(hWnd);
@@ -92,7 +97,6 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInst, LPSTR lpCmdLine, 
     pRootJob->Initialize();
 
     HWND hDlg = CreateDialog(hInstance, MAKEINTRESOURCE(IDD_DIALOG1), hWnd, (DLGPROC)DialogProc);
-
 
     //メッセージループ（何か起きるのを待つ）
     MSG msg;
@@ -168,6 +172,8 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 {
     switch (msg)
     {
+    case WM_MOUSEMOVE:
+        Input::SetMousePosition()
     case WM_DESTROY:
         PostQuitMessage(0);  //プログラム終了
         return 0;
@@ -175,11 +181,9 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
     return DefWindowProc(hWnd, msg, wParam, lParam);
 }
 
+//本物のダイアログプロシージャ
 BOOL CALLBACK DialogProc(HWND hDlg, UINT msg, WPARAM wParam, LPARAM lParam)
 {
-    switch (msg)
-    {
-
-    }
-    return FALSE;
+    Stage* pStage = (Stage*)pRootJob->FindObject("Stage");
+    return pStage->DialogProc(hDlg, msg, wParam, lParam);
 }

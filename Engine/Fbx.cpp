@@ -6,7 +6,8 @@
 
 Fbx::Fbx() :
 	 vertexCount_(0), polygonCount_(0), materialCount_(0),
-     pVertexBuffer_(nullptr), pIndexBuffer_(nullptr), pConstantBuffer_(nullptr)
+     pVertexBuffer_(nullptr), pIndexBuffer_(nullptr), pConstantBuffer_(nullptr),
+	 pMaterialList_(nullptr)
 {
 }
 
@@ -272,12 +273,13 @@ void Fbx::RayCast(RayCastData& rayData)
 			int i0 = ppIndex_[material][poly * 3 + 0];
 			int i1 = ppIndex_[material][poly * 3 + 1];
 			int i2 = ppIndex_[material][poly * 3 + 2];
-			XMVECTOR v0 = ;
-			XMVECTOR v1 = ;
-			XMVECTOR v2 = ;
-			XMVECTOR start = rayData.start;
-			XMVECTOR dir = rayData.dir;
-			float dist;
+			XMVECTOR v0 = pVertices_[ppIndex_[material][poly * 3 + 0]].position;
+			XMVECTOR v1 = pVertices_[ppIndex_[material][poly * 3 + 1]].position;
+			XMVECTOR v2 = pVertices_[ppIndex_[material][poly * 3 + 2]].position;
+			XMVECTOR start = XMLoadFloat4(&rayData.start);
+			XMVECTOR dir = XMFloat4(&rayData.dir);
+			XMVECTOR dir = XMFloat4(&rayData.dir);
+
 			rayData.hit = TriangleTests::Intersects(start, dir, v0, v1, v2, dist);
 
 			if (rayData.hit)
