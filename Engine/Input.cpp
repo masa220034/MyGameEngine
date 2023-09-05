@@ -1,4 +1,5 @@
 #include "Input.h"
+#include <string>
 
 namespace Input
 {
@@ -101,6 +102,8 @@ namespace Input
 	{
 		mousePosition.x = x;
 		mousePosition.y = y;
+		std::string resStr = std::to_string(x) + ", " + std::to_string(y);
+		OutputDebugString(resStr. c_str());
 	}
 
 	void Release()
