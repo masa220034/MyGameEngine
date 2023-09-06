@@ -85,10 +85,12 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInst, LPSTR lpCmdLine, 
         PostQuitMessage(0);
     }
     
-    Fbx* pFbx = new Fbx;
+    /*Fbx* pFbx = new Fbx;
     pFbx->Load("Assets/BoxBrick.fbx");
     RayCastData data;
-    data.start
+    data.start =
+    */
+
     Camera::Initialize();
 
     Input::Initialize(hWnd);
