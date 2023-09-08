@@ -59,8 +59,8 @@ void Stage::Initialize()
     {
         for (int x = 0; x < XSIZE; x++)
         {
-            SetBlock(x, z, (BLOCKTYPE)(z % 5));
-            SetBlockHeight(x, z, x % 5);
+            SetBlock(x, z, (BLOCKTYPE)(0));
+            SetBlockHeight(x, z, 0);
         }
     }
 }
@@ -108,11 +108,20 @@ void Stage::Update()
                 //⑤から④に向かってレイをうつ(とりあえずモデル番号はhModel_[0])
                 RayCastData data;
                 XMStoreFloat4(&data.start, vMouseFront);
-                XMStoreFloat4(&data.dir, );
+                XMStoreFloat4(&data.dir,vMouseBack - vMouseFront);
+                Transform trans;
+                trans.position_.x = x;
+                trans.position_.y = y;
+                trans.position_.z = z;
+                Model::SetTransform(hModel_[0], trans);
 
-                Model::RayCast(hmodel_[0], data);
+                Model::RayCast(hModel_[0], data);
 
                 //⑥レイが当たったらブレークポイントで止める
+                if (data.hit)
+                {
+                    break;
+                }
             }
         }
     }

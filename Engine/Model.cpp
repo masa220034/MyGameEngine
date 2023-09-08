@@ -67,5 +67,24 @@ void Model::Release()
 
 void Model::RayCast(int hModel, RayCastData& rayData)
 {
+	//?ƒ‚ƒfƒ‹‚Ìtransfrom‚ğcalclation
+	modelList[hModel]->transform_.Calclation();
+	//‡@ƒ[ƒ‹ƒhs—ñ‚Ì‹ts—ñ
+	XMMATRIX wInv = XMMatrixInverse(nullptr, modelList[hModel]->transform_.GetWorldMatrix());
+	//‡AƒŒƒC‚Ì’Ê‰ß“_‚ğ‹‚ß‚é(ƒ‚ƒfƒ‹‹óŠÔ‚Å‚Ì—á‚Ì•ûŒüƒxƒNƒgƒ‹‚ğ‹‚ß‚é)
+	XMVECTOR vpass{ rayData.start.x + rayData.dir.x,
+					rayData.start.y + rayData.dir.y,
+	                rayData.start.z + rayData.dir.z,
+	                rayData.start.w + rayData.dir.w};
+	//‡BrayData.start‚ğƒ‚ƒfƒ‹‹óŠÔ‚É•ÏŠ·(‡@‚ğ‚©‚¯‚é)
+	XMVECTOR vstart = XMLoadFloat4(&rayData.start);
+	vstart = XMVector3TransformCoord(vstart, wInv); //transformcoord‚Íw—v‘f‚ğ–³‹‚µ‚Ä‚­‚ê‚é
+	//‡C(n“_‚©‚ç•ûŒüƒxƒNƒgƒ‹‚ğ‚¿‚å‚¢L‚Î‚µ‚½æ)’Ê‰ß“_(‡A)‚É‡@‚ğ‚©‚¯‚é
+	vpass = XMVector3TransformCoord(vpass, wInv);
+	//‡DrayData.dir‚ğ‡B‚©‚ç‡C‚ÉŒü‚©‚¤ƒxƒNƒgƒ‹‚É‚·‚é(ˆø‚«Z)
+	vpass = vpass - vstart;
+	XMStoreFloat4(&rayData.dir, vpass);
+
+	//w’è‚µ‚½ƒ‚ƒfƒ‹”Ô†‚ÌFBX‚ÉƒŒƒCƒLƒƒƒXƒg
 	modelList[hModel]->pFbx_->RayCast(rayData);
 }
