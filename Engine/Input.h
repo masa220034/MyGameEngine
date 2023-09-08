@@ -14,10 +14,12 @@ namespace Input
 {
 	void Initialize(HWND hWnd);
 	void Update();
+
 	//キー
 	bool IsKey(int keyCode);
 	bool IsKeyDown(int keyCode);
 	bool IsKeyUp(int keyCode);
+	void Release();
 
 	//マウス
 	bool IsMouseButton(int buttonCode);
@@ -26,5 +28,4 @@ namespace Input
 	XMFLOAT3 GetMousePosition();
 	XMFLOAT3 GetMouseMove();
 	void SetMousePosition(int x, int y);
-	void Release();
 };
