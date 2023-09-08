@@ -1,9 +1,9 @@
-#include "Model.h"
+ï»¿#include "Model.h"
 #include "Direct3D.h"
 
 namespace Model {
 
-	//ƒ‚ƒfƒ‹‚Ìƒ|ƒCƒ“ƒ^‚ğ‚Ô‚¿‚ñ‚Å‚¨‚­ƒxƒNƒ^
+	//ãƒ¢ãƒ‡ãƒ«ã®ãƒã‚¤ãƒ³ã‚¿ã‚’ã¶ã¡è¾¼ã‚“ã§ãŠããƒ™ã‚¯ã‚¿
 	std::vector<ModelData*> modelList;
 }
 
@@ -14,7 +14,7 @@ int Model::Load(std::string fileName)
 	pData->filename_ = fileName;
 	pData->pFbx_ = nullptr;
 
-	//ƒtƒ@ƒCƒ‹ƒl[ƒ€‚ª“¯‚¶‚¾‚Á‚½‚çA“Ç‚Ü‚ñI
+	//ãƒ•ã‚¡ã‚¤ãƒ«ãƒãƒ¼ãƒ ãŒåŒã˜ã ã£ãŸã‚‰ã€èª­ã¾ã‚“ï¼
 	for (auto& e : modelList)
 	{
 		if (e->filename_ == fileName) {
@@ -36,16 +36,16 @@ int Model::Load(std::string fileName)
 void Model::SetTransform(int hModel, Transform transform)
 {
 	modelList[hModel]->transform_ = transform;
-	//ƒ‚ƒfƒ‹”Ô†‚ÍAmodelList‚ÌƒCƒ“ƒfƒbƒNƒX
+	//ãƒ¢ãƒ‡ãƒ«ç•ªå·ã¯ã€modelListã®ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹
 }
 void Model::Draw(int hModel) {
-	//ƒ‚ƒfƒ‹”Ô†‚ÍAmodelList‚ÌƒCƒ“ƒfƒbƒNƒX
+	//ãƒ¢ãƒ‡ãƒ«ç•ªå·ã¯ã€modelListã®ã‚¤ãƒ³ãƒ‡ãƒƒã‚¯ã‚¹
 	modelList[hModel]->pFbx_->Draw(modelList[hModel]->transform_);
 }
 
 void Model::Release()
 {
-	bool isReffered = false; //QÆ‚³‚ê‚Ä‚éH
+	bool isReffered = false; //å‚ç…§ã•ã‚Œã¦ã‚‹ï¼Ÿ
 	for (int i = 0; i < modelList.size(); i++)
 	{
 		for (int j = i + 1; j < modelList.size(); j++)
@@ -67,24 +67,24 @@ void Model::Release()
 
 void Model::RayCast(int hModel, RayCastData& rayData)
 {
-	//?ƒ‚ƒfƒ‹‚Ìtransfrom‚ğcalclation
+	//â“ªãƒ¢ãƒ‡ãƒ«ã®transfromã‚’calclation
 	modelList[hModel]->transform_.Calclation();
-	//‡@ƒ[ƒ‹ƒhs—ñ‚Ì‹ts—ñ
+	//â‘ ãƒ¯ãƒ¼ãƒ«ãƒ‰è¡Œåˆ—ã®é€†è¡Œåˆ—
 	XMMATRIX wInv = XMMatrixInverse(nullptr, modelList[hModel]->transform_.GetWorldMatrix());
-	//‡AƒŒƒC‚Ì’Ê‰ß“_‚ğ‹‚ß‚é(ƒ‚ƒfƒ‹‹óŠÔ‚Å‚Ì—á‚Ì•ûŒüƒxƒNƒgƒ‹‚ğ‹‚ß‚é)
+	//â‘¡ãƒ¬ã‚¤ã®é€šéç‚¹ã‚’æ±‚ã‚ã‚‹(ãƒ¢ãƒ‡ãƒ«ç©ºé–“ã§ã®ä¾‹ã®æ–¹å‘ãƒ™ã‚¯ãƒˆãƒ«ã‚’æ±‚ã‚ã‚‹)
 	XMVECTOR vpass{ rayData.start.x + rayData.dir.x,
 					rayData.start.y + rayData.dir.y,
 	                rayData.start.z + rayData.dir.z,
 	                rayData.start.w + rayData.dir.w};
-	//‡BrayData.start‚ğƒ‚ƒfƒ‹‹óŠÔ‚É•ÏŠ·(‡@‚ğ‚©‚¯‚é)
+	//â‘¢rayData.startã‚’ãƒ¢ãƒ‡ãƒ«ç©ºé–“ã«å¤‰æ›(â‘ ã‚’ã‹ã‘ã‚‹)
 	XMVECTOR vstart = XMLoadFloat4(&rayData.start);
-	vstart = XMVector3TransformCoord(vstart, wInv); //transformcoord‚Íw—v‘f‚ğ–³‹‚µ‚Ä‚­‚ê‚é
-	//‡C(n“_‚©‚ç•ûŒüƒxƒNƒgƒ‹‚ğ‚¿‚å‚¢L‚Î‚µ‚½æ)’Ê‰ß“_(‡A)‚É‡@‚ğ‚©‚¯‚é
+	vstart = XMVector3TransformCoord(vstart, wInv); //transformcoordã¯wè¦ç´ ã‚’ç„¡è¦–ã—ã¦ãã‚Œã‚‹
+	//â‘£(å§‹ç‚¹ã‹ã‚‰æ–¹å‘ãƒ™ã‚¯ãƒˆãƒ«ã‚’ã¡ã‚‡ã„ä¼¸ã°ã—ãŸå…ˆ)é€šéç‚¹(â‘¡)ã«â‘ ã‚’ã‹ã‘ã‚‹
 	vpass = XMVector3TransformCoord(vpass, wInv);
-	//‡DrayData.dir‚ğ‡B‚©‚ç‡C‚ÉŒü‚©‚¤ƒxƒNƒgƒ‹‚É‚·‚é(ˆø‚«Z)
+	//â‘¤rayData.dirã‚’â‘¢ã‹ã‚‰â‘£ã«å‘ã‹ã†ãƒ™ã‚¯ãƒˆãƒ«ã«ã™ã‚‹(å¼•ãç®—)
 	vpass = vpass - vstart;
 	XMStoreFloat4(&rayData.dir, vpass);
 
-	//w’è‚µ‚½ƒ‚ƒfƒ‹”Ô†‚ÌFBX‚ÉƒŒƒCƒLƒƒƒXƒg
+	//æŒ‡å®šã—ãŸãƒ¢ãƒ‡ãƒ«ç•ªå·ã®FBXã«ãƒ¬ã‚¤ã‚­ãƒ£ã‚¹ãƒˆ
 	modelList[hModel]->pFbx_->RayCast(rayData);
 }
