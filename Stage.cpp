@@ -2,6 +2,7 @@
 #include "resource.h"
 #include "Engine/Model.h"
 #include "Engine/Input.h"
+#include "Engine/Fbx.h"
 #include "Engine/Camera.h"
 
 void Stage::SetBlock(int _x, int _z, BLOCKTYPE _type)
