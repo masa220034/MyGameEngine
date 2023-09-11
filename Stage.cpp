@@ -120,6 +120,7 @@ void Stage::Update()
                 //⑥レイが当たったらブレークポイントで止める
                 if (data.hit)
                 {
+                    table_[x][z].height++;
                     break;
                 }
             }

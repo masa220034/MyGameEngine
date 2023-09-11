@@ -268,18 +268,14 @@ void Fbx::RayCast(RayCastData& rayData)
 		//あるマテリアルmaterialのindex数を３で割るとポリゴン数になる
 		for (int poly = 0; poly < indexCount_[material] / 3; poly++)
 		{
-			ppIndex_[material][poly * 3] material;
-			int i0 = ppIndex_[material][poly * 3 + 0];
-			int i1 = ppIndex_[material][poly * 3 + 1];
-			int i2 = ppIndex_[material][poly * 3 + 2];
-			XMVECTOR v0 = pVertices_[ppIndex_[material][poly * 3 + 0]].position;
-			XMVECTOR v1 = pVertices_[ppIndex_[material][poly * 3 + 1]].position;
-			XMVECTOR v2 = pVertices_[ppIndex_[material][poly * 3 + 2]].position;
+			XMVECTOR vv0 = pVertices_[ppIndex_[material][poly * 3 + 0]].position;
+			XMVECTOR vv1 = pVertices_[ppIndex_[material][poly * 3 + 1]].position;
+			XMVECTOR vv2 = pVertices_[ppIndex_[material][poly * 3 + 2]].position;
 			XMVECTOR start = XMLoadFloat4(&rayData.start);
-			XMVECTOR dir = XMFloat4(&rayData.dir);
-			XMVECTOR dir = XMFloat4(&rayData.dir);
+			XMVECTOR dir = XMLoadFloat4(&rayData.dir);
+			XMVECTOR dirN = XMVector4Normalize(dir);
 
-			rayData.hit = TriangleTests::Intersects(start, dir, v0, v1, v2, dist);
+			rayData.hit = TriangleTests::Intersects(start, dirN, vv0, vv1, vv2, rayData.dist);
 
 			if (rayData.hit)
 			{
