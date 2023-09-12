@@ -69,11 +69,15 @@ void Stage::Initialize()
 //çXêV
 void Stage::Update()
 {
+    if (!Input::IsMouseButtonDown(0))
+    {
+        return;
+    }
     float w = (float)(Direct3D::scrWidth / 2.0f);
     float h = (float)(Direct3D::scrHeight / 2.0f);
-
     //Offsetx.yÇÕ0
     //minZ = 0 maxZ = 1
+
     XMMATRIX vp =
     {
         w, 0, 0, 0,
