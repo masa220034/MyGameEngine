@@ -17,7 +17,7 @@ void Stage::SetBlockHeight(int _x, int _z, int _height)
 
 //コンストラクタ
 Stage::Stage(GameObject* parent)
-    :GameObject(parent, "Stage")
+    :GameObject(parent, "Stage"), selectedAction(IDC_RADIO_UP)
 {
     for (int i = 0; i < MODEL_NUM; i++)
     {
@@ -125,8 +125,27 @@ void Stage::Update()
                 //⑥レイが当たったらブレークポイントで止める
                 if (data.hit)
                 {
-                    table_[x][z].height++;
-                    break;
+                    switch (selectedAction)
+                    {
+                    case IDC_RADIO_UP:
+                        // "上げる" アクション
+                        table_[x][z].height++;
+                        break;
+
+                    case IDC_RADIO_DOWN:
+                        // "下げる" アクション
+                        if (table_[x][z].height > 0)
+                        {
+                            table_[x][z].height--;
+                        }
+                        break;
+
+                    case IDC_RADIO_CHANGE:
+                        // "変更" アクション
+                        // ブロックの種類を変更する
+                        // table_[x][z].type = 新しいブロックの種類;
+                        break;
+                    }
                 }
             }
         }
@@ -180,6 +199,20 @@ BOOL Stage::DialogProc(HWND hDlg, UINT msg, WPARAM wParam, LPARAM lParam)
         SendMessage(GetDlgItem(hDlg, IDC_COMBO1), CB_SETCURSEL, 0, 0);
 
         return TRUE;
+
+    case WM_COMMAND:
+        // ボタンのクリックイベント処理
+        switch (LOWORD(wParam)) {
+        case IDC_RADIO_UP:
+        case IDC_RADIO_DOWN:
+        case IDC_RADIO_CHANGE:
+            // ラジオボタンがクリックされたら、選択アクションを更新
+            selectedAction = LOWORD(wParam);
+            break;
+
+            // 他のコントロールの処理
+            // ...
+        }
     }
     return FALSE;
 }

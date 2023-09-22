@@ -24,6 +24,7 @@ class Stage : public GameObject
 
     int mode_;     //0:ã‚°‚é, 1:‰º‚°‚é, 2:í—Ş•Ï‚¦‚é
     int select_;   //í—Ş
+    int selectedAction;
 
 public:
     void SetBlock(int _x, int _z, BLOCKTYPE _type);
