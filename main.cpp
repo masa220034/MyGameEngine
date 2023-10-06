@@ -64,26 +64,6 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInst, LPSTR lpCmdLine, 
         NULL                 //パラメータ（なし）
     );
 
-    //ファイルの作成/表示
-    HANDLE hFile = CreateFile(
-        "MapEditer",             //ファイル名
-        GENERIC_WRITE,           //アクセスモード（書き込み用）
-        0,                      //共有（なし）
-        NULL,                   //セキュリティ属性（継承しない）
-        CREATE_ALWAYS,           //作成方法
-        FILE_ATTRIBUTE_NORMAL,  //属性とフラグ（設定なし）
-        NULL);                  //拡張属性（なし） 
-
-    //ファイルの読み書き
-    DWORD dwBytes = 0;  //書き込み位置
-    WriteFile(
-        hFile,                   //ファイルハンドル
-        ,                  //保存するデータ（文字列）
-        (DWORD)strlen(●●●),   //書き込む文字数
-        &dwBytes,                //書き込んだサイズを入れる変数
-        NULL);                   //オーバーラップド構造体（今回は使わない）
-
-
     //ウィンドウを表示
     ShowWindow(hWnd, nCmdShow);
 
@@ -197,7 +177,21 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
     case WM_DESTROY:
         PostQuitMessage(0);  //プログラム終了
         return 0;
+    case WM_COMMAND:
+        switch (LOWORD(wParam))
+        {
+        case ID_MENU_NEW:
+            OutputDebugString("new FILE");
+            break;
+        case ID_MENU_OPEN:
+            OutputDebugString("open FILE");
+            break;
+        case ID_MENU_SAVE:
+            OutputDebugString("Save FILE");
+            return 0;
+        }
     }
+    
     return DefWindowProc(hWnd, msg, wParam, lParam);
 }
 
