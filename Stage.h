@@ -49,5 +49,7 @@ public:
     void Release() override;
 
     BOOL DialogProc(HWND hDlg, UINT msg, WPARAM wParam, LPARAM lParam);
+
+    void Save();
 };
 
