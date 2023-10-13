@@ -104,6 +104,9 @@ void Stage::Update()
     //④ ③にinvVP, invPrj, invViewをかける
     vMouseBack = XMVector3TransformCoord(vMouseBack, invVP * invProj * invView);
 
+    int bufX = -1, bufZ;
+    float minDistance = 9999999;
+
     for (int x = 0; x < 15; x++)
     {
         for (int z = 0; z < 15; z++)
@@ -125,29 +128,32 @@ void Stage::Update()
                 //⑥レイが当たったらブレークポイントで止める
                 if (data.hit)
                 {
-                    switch (selectedAction)
+                    if (minDistance > data.dist)
                     {
-                    case IDC_RADIO_UP:
-                        // "上げる" アクション
-                        table_[x][z].height++;
-                        break;
-
-                    case IDC_RADIO_DOWN:
-                        // "下げる" アクション
-                        if (table_[x][z].height > 0)
-                        {
-                            table_[x][z].height--;
-                        }
-                        break;
-
-                    case IDC_RADIO_CHANGE:
-                        // "変更" アクション
-                        // ブロックの種類を変更する
-                        // table_[x][z].type = 新しいブロックの種類;
-                        break;
+                        minDistance = data.dist;
+                        bufX = x;
+                        bufZ = z;
                     }
                 }
             }
+        }
+    }
+    if (bufX >= 0)
+    {
+        switch (mode_)
+        {
+        case 0:
+            table_[bufX][bufZ].height++;
+            break;
+        case 1:
+            if (table_[bufX][bufZ].height > 0)
+            {
+                table_[bufX][bufZ].height--;
+            }
+            break;
+        case 2:
+            table_[bufX][bufZ].type = select_;
+            break;
         }
     }
 }
@@ -202,17 +208,27 @@ BOOL Stage::DialogProc(HWND hDlg, UINT msg, WPARAM wParam, LPARAM lParam)
 
     case WM_COMMAND:
         // ボタンのクリックイベント処理
-        switch (LOWORD(wParam)) {
+        switch (LOWORD(wParam)) 
+        {
         case IDC_RADIO_UP:
-        case IDC_RADIO_DOWN:
-        case IDC_RADIO_CHANGE:
-            // ラジオボタンがクリックされたら、選択アクションを更新
-            selectedAction = LOWORD(wParam);
-            break;
+            mode_ = 0;
+            return TRUE;
 
-            // 他のコントロールの処理
-            // ...
+        case IDC_RADIO_DOWN:
+            mode_ = 1;
+            return TRUE;
+
+        case IDC_RADIO_CHANGE:
+            mode_ = 2;
+            return TRUE;
+        case IDC_COMBO1:
+            /*ラジオボタンがクリックされたら、選択アクションを更新
+            selectedAction = LOWORD(wParam);
+            break;*/
+            select_ = (int)SendMessage(GetDlgItem(hDlg, IDC_COMBO1), CB_GETCURSEL, 0, 0);
+            return TRUE;
         }
+        return FALSE;
     }
     return FALSE;
 }
@@ -242,7 +258,7 @@ void Stage::Save()
 //セーブのルーチン
     HANDLE hFile;
     hFile = CreateFile(
-        "無題.map",             //ファイル名
+        fileName,             //ファイル名
         GENERIC_WRITE,          //アクセスモード（書き込み用）
         0,                      //共有（なし）
         NULL,                   //セキュリティ属性（継承しない）
@@ -250,11 +266,15 @@ void Stage::Save()
         FILE_ATTRIBUTE_NORMAL,  //属性とフラグ（設定なし）
         NULL);                  //拡張属性（なし）
 
+    std::string data = "";
+
     DWORD dwBytes = 0;          //書き込み位置
     WriteFile(                  
         hFile,                  //ファイルハンドル
-        ,                       //保存するデータ（文字列）
-        (DWORD)strlen(),        //書き込む文字数
+        "ABCDEF",                       //保存するデータ（文字列）
+        12,        //書き込む文字数
         &dwBytes,               //書き込んだサイズを入れる変数
         NULL);                  //オーバーラップド構造体（今回は使わない）
+
+    CloseHandle(hFile);
 }
