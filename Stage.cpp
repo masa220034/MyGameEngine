@@ -43,9 +43,9 @@ void Stage::Initialize()
     string modelname[] = {
         "BoxDefault.fbx",
         "BoxBrick.fbx",
-        "BoxGrass.fbx",
         "BoxSand.fbx",
-        "BoxWater.fbx"
+        "BoxWater.fbx",
+        "BoxGrass.fbx"
     };
     string fname_base = "assets/";
     //モデルデータのロード
