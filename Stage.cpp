@@ -221,12 +221,16 @@ BOOL Stage::DialogProc(HWND hDlg, UINT msg, WPARAM wParam, LPARAM lParam)
         case IDC_RADIO_CHANGE:
             mode_ = 2;
             return TRUE;
+
         case IDC_COMBO1:
             /*ラジオボタンがクリックされたら、選択アクションを更新
             selectedAction = LOWORD(wParam);
             break;*/
             select_ = (int)SendMessage(GetDlgItem(hDlg, IDC_COMBO1), CB_GETCURSEL, 0, 0);
             return TRUE;
+
+        case IDC_RADIO_RESTORE:
+            mode_ = 3;
         }
         return FALSE;
     }
