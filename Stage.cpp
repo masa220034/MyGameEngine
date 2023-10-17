@@ -154,6 +154,10 @@ void Stage::Update()
         case 2:
             table_[bufX][bufZ].type = select_;
             break;
+        case 3:
+            table_[bufX][bufZ].height = 0;
+            table_[bufX][bufZ].type = DEFAULT;
+            break;
         }
     }
 }
@@ -189,6 +193,7 @@ void Stage::Release()
 //偽物のダイアログプロシージャ
 BOOL Stage::DialogProc(HWND hDlg, UINT msg, WPARAM wParam, LPARAM lParam)
 {
+
     switch (msg)
     {
     //ダイアログができた
@@ -231,6 +236,7 @@ BOOL Stage::DialogProc(HWND hDlg, UINT msg, WPARAM wParam, LPARAM lParam)
 
         case IDC_RADIO_RESTORE:
             mode_ = 3;
+            return TRUE;
         }
         return FALSE;
     }
