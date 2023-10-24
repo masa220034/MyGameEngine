@@ -160,6 +160,8 @@ void Stage::Update()
             break;
         }
     }
+
+    Save();
 }
 
 //描画
@@ -281,8 +283,8 @@ void Stage::Save()
     DWORD dwBytes = 0;          //書き込み位置
     WriteFile(                  
         hFile,                  //ファイルハンドル
-        ,                       //保存するデータ（文字列）
-        ,                       //書き込む文字数
+        data.c_str(),                       //保存するデータ（文字列）
+        static_cast<DWORD>(data.length()),                       //書き込む文字数
         &dwBytes,               //書き込んだサイズを入れる変数
         NULL);                  //オーバーラップド構造体（今回は使わない）
 
