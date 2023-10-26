@@ -155,8 +155,14 @@ void Stage::Update()
             table_[bufX][bufZ].type = select_;
             break;
         case 3:
-            table_[bufX][bufZ].height = 0;
-            table_[bufX][bufZ].type = DEFAULT;
+            for (int x = 0; x < XSIZE; x++)
+            {
+                for (int z = 0; z < ZSIZE; z++)
+                {
+                    SetBlock(x, z, DEFAULT);
+                    SetBlockHeight(x, z, 0);
+                }
+            }
             break;
         }
     }
