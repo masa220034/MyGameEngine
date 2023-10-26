@@ -249,12 +249,22 @@ std::string Stage::SerializeStageData()
 {
     std::string stageData;
 
+    int count = 0;
+
     for (int x = 0; x < XSIZE; x++)
     {
         for (int z = 0; z < ZSIZE; z++)
         {
-            stageData += std::to_string(table_[x][z].type) + " ";
-            stageData += std::to_string(table_[x][z].height) + " ";
+            stageData += std::to_string(table_[x][z].type) + ",";
+            stageData += std::to_string(table_[x][z].height) + "  ";
+
+            count++;
+
+            if (count >= 15)
+            {
+                stageData += "\n";
+                count = 0;
+            }
         }
     }
     return stageData;
