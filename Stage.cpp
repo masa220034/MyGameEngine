@@ -245,6 +245,21 @@ BOOL Stage::DialogProc(HWND hDlg, UINT msg, WPARAM wParam, LPARAM lParam)
     return FALSE;
 }
 
+std::string Stage::SerializeStageData()
+{
+    std::string stageData;
+
+    for (int x = 0; x < XSIZE; x++)
+    {
+        for (int z = 0; z < ZSIZE; z++)
+        {
+            stageData += std::to_string(table_[x][z].type) + " ";
+            stageData += std::to_string(table_[x][z].height) + " ";
+        }
+    }
+    return stageData;
+}
+
 void Stage::Save()
 {
     char fileName[MAX_PATH] = "無題.map";        //ファイル名を入れる変数
@@ -267,7 +282,7 @@ void Stage::Save()
     //キャンセルしたら中断
     if (selFile == FALSE) return;
 
-//セーブのルーチン
+    //セーブのルーチン
     HANDLE hFile;
     hFile = CreateFile(
         fileName,               //ファイル名
@@ -278,15 +293,15 @@ void Stage::Save()
         FILE_ATTRIBUTE_NORMAL,  //属性とフラグ（設定なし）
         NULL);                  //拡張属性（なし）
 
-    std::string data = ; // ステージ情報を文字列として取得
+    std::string data = SerializeStageData(); // ステージ情報を文字列として取得
 
-    DWORD dwBytes = 0;          //書き込み位置
-    WriteFile(                  
-        hFile,                  //ファイルハンドル
-        data.c_str(),                       //保存するデータ（文字列）
-        static_cast<DWORD>(data.length()),                       //書き込む文字数
-        &dwBytes,               //書き込んだサイズを入れる変数
-        NULL);                  //オーバーラップド構造体（今回は使わない）
+    DWORD dwBytes = 0;                //書き込み位置
+    WriteFile(
+        hFile,                        //ファイルハンドル
+        data.c_str(),                 //保存するデータ（文字列）
+        (DWORD)strlen(data.c_str()),  //書き込む文字数
+        &dwBytes,                     //書き込んだサイズを入れる変数
+        NULL);                        //オーバーラップド構造体（今回は使わない）
 
     CloseHandle(hFile);
 }
