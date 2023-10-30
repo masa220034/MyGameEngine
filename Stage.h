@@ -50,7 +50,7 @@ public:
 
     BOOL DialogProc(HWND hDlg, UINT msg, WPARAM wParam, LPARAM lParam);
 
-    std::string SerializeStageData();
+    std::string StageData();
 
     void Save();
 };

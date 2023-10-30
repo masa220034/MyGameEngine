@@ -251,7 +251,7 @@ BOOL Stage::DialogProc(HWND hDlg, UINT msg, WPARAM wParam, LPARAM lParam)
     return FALSE;
 }
 
-std::string Stage::SerializeStageData()
+std::string Stage::StageData()
 {
     std::string stageData;
 
@@ -309,7 +309,7 @@ void Stage::Save()
         FILE_ATTRIBUTE_NORMAL,  //属性とフラグ（設定なし）
         NULL);                  //拡張属性（なし）
 
-    std::string data = SerializeStageData(); // ステージ情報を文字列として取得
+    std::string data = StageData(); // ステージ情報を文字列として取得
 
     DWORD dwBytes = 0;                //書き込み位置
     WriteFile(
