@@ -167,7 +167,7 @@ void Stage::Update()
         }
     }
 
-    Save();
+    //Save();
 }
 
 //描画
@@ -201,7 +201,6 @@ void Stage::Release()
 //偽物のダイアログプロシージャ
 BOOL Stage::DialogProc(HWND hDlg, UINT msg, WPARAM wParam, LPARAM lParam)
 {
-
     switch (msg)
     {
     //ダイアログができた
