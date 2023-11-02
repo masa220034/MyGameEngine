@@ -320,3 +320,54 @@ void Stage::Save()
 
     CloseHandle(hFile);
 }
+
+void Stage::Load()
+{
+    char fileName[MAX_PATH] = {}; // ファイル名のバッファ
+
+    // 「ファイルを開く」ダイアログを設定
+    OPENFILENAME ofn;
+    ZeroMemory(&ofn, sizeof(ofn));
+    ofn.lStructSize = sizeof(OPENFILENAME);
+    ofn.lpstrFilter = TEXT("マップデータ(*.map)\0*.map\0")
+        TEXT("すべてのファイル(*.*)\0*.*\0\0");
+    ofn.lpstrFile = fileName;
+    ofn.nMaxFile = MAX_PATH;
+    ofn.Flags = OFN_FILEMUSTEXIST; // ロードの場合、ファイルは存在している必要がある
+    ofn.lpstrDefExt = "map";
+
+    // 「ファイルを開く」ダイアログを表示
+    BOOL selFile;
+    selFile = GetOpenFileName(&ofn);
+
+    // キャンセルされたか、ファイルが選択されなかった場合
+    if (selFile == FALSE) return;
+ 
+    HANDLE hFile;        //ファイルのハンドル
+    hFile = CreateFile(
+        fileName,                 //ファイル名
+        GENERIC_READ,           //アクセスモード（書き込み用）
+        0,                      //共有（なし）
+        NULL,                   //セキュリティ属性（継承しない）
+        OPEN_EXISTING,           //作成方法
+        FILE_ATTRIBUTE_NORMAL,  //属性とフラグ（設定なし）
+        NULL); //拡張属性（なし）
+
+    //ファイルのサイズを取得
+    DWORD fileSize = GetFileSize(hFile, NULL);
+
+    //ファイルのサイズ分メモリを確保
+    char* data;
+    data = new char[fileSize];
+
+    DWORD dwBytes = 0; //読み込み位置
+
+    ReadFile(
+        hFile,     //ファイルハンドル
+        data,      //データを入れる変数
+        fileSize,  //読み込むサイズ
+        &dwBytes,  //読み込んだサイズ
+        NULL);     //オーバーラップド構造体（今回は使わない）
+
+    CloseHandle(hFile);
+}

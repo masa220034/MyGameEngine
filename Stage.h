@@ -53,5 +53,7 @@ public:
     std::string StageData();
 
     void Save();
+
+    void Load();
 };
 

@@ -169,6 +169,8 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInst, LPSTR lpCmdLine, 
 //ウィンドウプロシージャ（何かあった時によばれる関数）
 LRESULT CALLBACK WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 {
+    Stage* pStage = nullptr;
+
     switch (msg)
     {
     case WM_MOUSEMOVE:
@@ -184,11 +186,25 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
             OutputDebugString("new FILE");
             break;
         case ID_MENU_OPEN:
-            OutputDebugString("open FILE");
+            pStage = (Stage*)pRootJob->FindObject("Stage");
+            if (pStage)
+            {
+                if (dynamic_cast<Stage*>(pStage))
+                {
+                    pStage->Load();
+                }
+            }
             break;
         case ID_MENU_SAVE:
-            OutputDebugString("Save FILE");
-            return 0;
+            pStage = (Stage*)pRootJob->FindObject("Stage");
+            if (pStage)
+            {
+                if (dynamic_cast<Stage*>(pStage))
+                {
+                    pStage->Save();
+                }
+            }
+            break;
         }
     }
     
