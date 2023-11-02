@@ -167,7 +167,6 @@ void Stage::Update()
         }
     }
 
-    //Save();
 }
 
 //•`‰æ
