@@ -361,7 +361,6 @@ void Stage::Load()
     data = new char[fileSize];
 
     DWORD dwBytes = 0; //読み込み位置
-
     ReadFile(
         hFile,     //ファイルハンドル
         data,      //データを入れる変数
