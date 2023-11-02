@@ -288,7 +288,7 @@ void Stage::Save()
     ofn.lpstrFile = fileName;                    //ファイル名
     ofn.nMaxFile = MAX_PATH;                     //パスの最大文字数
     ofn.Flags = OFN_OVERWRITEPROMPT;             //フラグ（同名ファイルが存在したら上書き確認）
-    ofn.lpstrDefExt = "map";                     //デフォルト拡張子
+    //ofn.lpstrDefExt = "map";                     //デフォルト拡張子
 
     //「ファイルを保存」ダイアログ
     BOOL selFile;
@@ -368,5 +368,26 @@ void Stage::Load()
         &dwBytes,  //読み込んだサイズ
         NULL);     //オーバーラップド構造体（今回は使わない）
 
+    for (int x = 0; x < XSIZE; x++)
+    {
+        for (int z = 0; z < ZSIZE; z++)
+        {
+            int type, height;
+            if (sscanf_s(data, "%d %d", &type, &height) == 2)
+            {
+                table_[x][z].type = type;
+                table_[x][z].height = height;
+            }
+
+            data = strchr(data, '\n');
+
+            if (data != nullptr)
+            {
+                ++data;
+            }
+        }
+    }
+
     CloseHandle(hFile);
+    std::string fileContent(data,fileSize);
 }
